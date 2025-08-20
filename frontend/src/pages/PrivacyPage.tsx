@@ -1,52 +1,58 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { motion } from 'framer-motion'
 
 export function PrivacyPage() {
   return (
-    <div className="flex justify-center items-center min-h-[80vh] bg-gradient-to-b from-white to-[#f8f7fa] dark:from-[#1a141c] dark:to-[#2b202d] py-12">
-      <Card className="w-full max-w-2xl shadow-xl border-2 border-[#ecd6e6] dark:border-[#2e1a26]">
-        <CardHeader>
-          <CardTitle className="font-orbitron font-bold text-3xl text-[#8B0836]">Privacy Policy</CardTitle>
-        </CardHeader>
-        <Separator />
-        <CardContent>
-          <ScrollArea className="h-[40vh] pr-2">
-            <div className="space-y-4 text-base font-inter text-gray-800 dark:text-gray-100">
-              <p><b>Last updated:</b> June 2024</p>
-              <p>
-                Welcome to <span className="text-[#FB2C36] font-semibold">Tetris Effects</span>! We are committed to protecting your privacy and ensuring a safe, delightful experience while you shape the future—one block at a time.
-              </p>
-              <h2 className="text-lg font-semibold mt-4">1. Information We Collect</h2>
-              <ul className="list-disc ml-6">
-                <li>Account information (username, email, avatar)</li>
-                <li>Gameplay stats (scores, levels, replays, badges)</li>
-                <li>Device/browser data (for optimization)</li>
-              </ul>
-              <h2 className="text-lg font-semibold mt-4">2. How We Use Your Info</h2>
-              <ul className="list-disc ml-6">
-                <li>To show leaderboards and badges</li>
-                <li>To personalize your game experience</li>
-                <li>To improve gameplay and effects</li>
-              </ul>
-              <h2 className="text-lg font-semibold mt-4">3. Sharing</h2>
-              <p>We never sell your data. We only share anonymized scores for the leaderboard and never disclose personal details.</p>
-              <h2 className="text-lg font-semibold mt-4">4. Cookies</h2>
-              <p>
-                We may use cookies for login sessions and to remember your settings. No tracking cookies—just pure play!
-              </p>
-              <h2 className="text-lg font-semibold mt-4">5. Your Rights</h2>
-              <p>
-                You're in control. You may update your profile or request your data be deleted at any time. Contact us via the in-app help widget or at <span className="font-mono text-sm text-[#8B0836]">support@tetriseffects.fun</span>.
-              </p>
-              <h2 className="text-lg font-semibold mt-4">6. Changes</h2>
-              <p>
-                This policy may update from time to time. We'll always notify you in-app if anything important changes. Thank you for being part of the most electrifying Tetris experience yet!
-              </p>
-            </div>
-          </ScrollArea>
-        </CardContent>
-      </Card>
-    </div>
+    <ScrollArea className="mx-auto max-w-2xl p-6 mt-6 mb-16">
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <Card className="shadow-2xl border-primary/20">
+          <CardHeader>
+            <CardTitle className="font-orbitron text-3xl text-primary">Privacy Policy</CardTitle>
+          </CardHeader>
+          <Separator />
+          <CardContent className="pt-5 space-y-6 text-base leading-relaxed font-inter text-gray-800">
+            <p>
+              At Tetris Effects, your privacy matters to us. We are committed to protecting your personal data and ensuring a safe, secure, and engaging experience.
+            </p>
+            <h2 className="font-semibold text-lg mt-4 text-primary">Information We Collect</h2>
+            <ul className="list-disc ml-6">
+              <li>Basic account information (username, avatar)</li>
+              <li>Game performance data (scores, levels, stats)</li>
+              <li>Usage data (settings, preferences, gameplay actions)</li>
+            </ul>
+            <h2 className="font-semibold text-lg mt-4 text-primary">How We Use Your Data</h2>
+            <ul className="list-disc ml-6">
+              <li>To provide you with a personalized and dynamic Tetris experience</li>
+              <li>To display leaderboards, stats, and achievements</li>
+              <li>To improve our app and develop new effects and features</li>
+            </ul>
+            <h2 className="font-semibold text-lg mt-4 text-primary">Data Sharing</h2>
+            <p>
+              We do <span className="font-bold">not</span> sell your data. Your data is only shared with trusted service providers as needed to operate the game. All third parties adhere to strict privacy standards.
+            </p>
+            <h2 className="font-semibold text-lg mt-4 text-primary">Cookies & Tracking</h2>
+            <p>
+              We use cookies and local storage to remember your settings and progress. No third-party tracking or advertising cookies are used.
+            </p>
+            <h2 className="font-semibold text-lg mt-4 text-primary">Your Rights</h2>
+            <ul className="list-disc ml-6">
+              <li>Access, update, or delete your account info at any time</li>
+              <li>Request data export or deletion by contacting us</li>
+            </ul>
+            <p>
+              Questions or concerns? Contact our privacy team at <span className="font-semibold text-secondary">privacy@tetriseffects.app</span>.
+            </p>
+            <Separator className="my-4" />
+            <p className="text-xs text-gray-400">Last updated: June 2024</p>
+          </CardContent>
+        </Card>
+      </motion.div>
+    </ScrollArea>
   )
 }
