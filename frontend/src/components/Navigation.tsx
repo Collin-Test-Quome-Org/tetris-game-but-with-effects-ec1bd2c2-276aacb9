@@ -1,48 +1,88 @@
-import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuLink } from '@/components/ui/navigation-menu'
-import { navigationMenuTriggerStyle } from '@/components/ui/navigation-menu'
-import { Button } from '@/components/ui/button'
-import { User, Trophy, Play, Home, Layers, Activity, Settings, Info } from 'lucide-react'
-import { Link, useLocation } from 'react-router-dom'
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuLink,
+} from '@/components/ui/navigation-menu';
+import { navigationMenuTriggerStyle } from '@/components/ui/navigation-menu';
+import { User, Trophy, FlaskConical, BookOpenCheck, Cog, Info } from 'lucide-react';
 
 const navLinks = [
-  { to: '/play', label: 'Play', icon: Play },
-  { to: '/levels', label: 'Levels', icon: Layers },
-  { to: '/leaderboard', label: 'Leaderboard', icon: Trophy },
-  { to: '/profile', label: 'Profile', icon: User },
-  { to: '/settings', label: 'Settings', icon: Settings },
-  { to: '/about', label: 'About', icon: Info },
-]
+  {
+    label: 'Effects Lab',
+    to: '/effects-lab',
+    icon: <FlaskConical className="w-5 h-5" />,
+  },
+  {
+    label: 'Leaderboard',
+    to: '/leaderboard',
+    icon: <Trophy className="w-5 h-5" />,
+  },
+  {
+    label: 'Tutorial',
+    to: '/tutorial',
+    icon: <BookOpenCheck className="w-5 h-5" />,
+  },
+  {
+    label: 'Profile',
+    to: '/profile',
+    icon: <User className="w-5 h-5" />,
+  },
+  {
+    label: 'Settings',
+    to: '/settings',
+    icon: <Cog className="w-5 h-5" />,
+  },
+  {
+    label: 'Terms',
+    to: '/terms',
+    icon: <Info className="w-5 h-5" />,
+  },
+  {
+    label: 'Privacy',
+    to: '/privacy',
+    icon: <Info className="w-5 h-5" />,
+  },
+];
 
 export function Navigation() {
-  const location = useLocation()
+  const location = useLocation();
   return (
-    <nav className="w-full bg-white/95 border-b shadow-sm sticky top-0 z-30">
-      <div className="max-w-7xl mx-auto flex justify-between items-center px-4 py-2">
+    <nav className="w-full shadow bg-white/90 backdrop-blur z-10 sticky top-0">
+      <div className="container mx-auto flex items-center justify-between py-2 px-4">
         <NavigationMenu>
-          <NavigationMenuList>
+          <NavigationMenuList className="gap-1">
             <NavigationMenuItem>
-              <NavigationMenuLink asChild className={navigationMenuTriggerStyle() + ' px-2 py-1'}>
-                <Link to="/">
-                  <img src="/branding/assets/logo-0.png" className="h-8 w-8 inline-block mr-2 align-middle" />
+              <NavigationMenuLink asChild className={navigationMenuTriggerStyle() + ' flex items-center'}>
+                <Link to="/" aria-label="Home">
+                  <img src={require('/branding/assets/logo-0.png')} className="w-9 h-9 mr-1 rounded-sm shadow-sm" />
+                  <span className="font-orbitron font-bold text-primary text-xl tracking-tight align-middle">BlockLab</span>
                 </Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
-            {navLinks.map(({ to, label, icon: Icon }) => (
+            {navLinks.map(({ label, to, icon }) => (
               <NavigationMenuItem key={to}>
-                <NavigationMenuLink asChild className={navigationMenuTriggerStyle() + (location.pathname.startsWith(to) ? ' bg-secondary text-white' : '')}>
-                  <Link to={to} className="flex items-center gap-2">
-                    <Icon className="w-5 h-5" />
-                    <span>{label}</span>
+                <NavigationMenuLink
+                  asChild
+                  className={
+                    navigationMenuTriggerStyle() +
+                    (location.pathname === to ?
+                      ' bg-primary text-white shadow-md' :
+                      ' bg-white hover:bg-primary/10')
+                  }
+                >
+                  <Link to={to} aria-label={label} className="flex items-center gap-1">
+                    {icon}
+                    <span className="font-semibold text-base">{label}</span>
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
             ))}
           </NavigationMenuList>
         </NavigationMenu>
-        <div className="flex gap-2">
-          <Button id="btn-login" variant="outline" asChild><Link to="/login">Login</Link></Button>
-        </div>
       </div>
     </nav>
-  )
+  );
 }
